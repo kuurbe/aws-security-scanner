@@ -2,8 +2,12 @@ import boto3
 import os
 from datetime import datetime
 
-# Set up AWS session and clients
-session = boto3.Session()
+# Set up AWS session with secrets from GitHub Actions
+session = boto3.Session(
+    aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
+    aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY')
+)
+
 iam = session.client('iam')
 s3 = session.client('s3')
 
